@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="TradeMesh — a unified stocks, crypto and forex trading UI demo. Simulated data and order flow only; no real trading, payments or brokerage." />
+<meta name="theme-color" content="#0B0D11" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230B0D11'/%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='32' y2='32'%3E%3Cstop offset='0' stop-color='%23F0B429'/%3E%3Cstop offset='1' stop-color='%2322D3C0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='3' y='3' width='26' height='26' rx='6' fill='url(%23g)'/%3E%3Ctext x='16' y='22' font-family='Arial,Helvetica,sans-serif' font-size='14' font-weight='700' text-anchor='middle' fill='%230B0D11'%3ETM%3C/text%3E%3C/svg%3E" />
 <title>TradeMesh — One Platform, Global Markets</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
@@ -93,7 +96,8 @@
   .btn-ghost:hover{border-color:var(--muted);}
   .btn-brand{background:var(--brand); color:#171208; border:none;}
   .btn-brand:hover{filter:brightness(1.08);}
-  .menu-toggle{display:none; background:none; border:none; color:var(--text); font-size:22px; cursor:pointer;}
+  .menu-toggle{display:none; background:none; border:none; color:var(--text); font-size:22px; cursor:pointer; transition:opacity .15s;}
+  .menu-toggle:hover{opacity:0.75;}
 
   /* ---- Hero ---- */
   .hero{
@@ -168,8 +172,9 @@
   .tab-btn{
     flex:1; padding:15px; text-align:center; background:none; border:none; cursor:pointer;
     color:var(--muted); font-family:'Space Grotesk'; font-weight:600; font-size:14.5px;
-    border-bottom:2px solid transparent;
+    border-bottom:2px solid transparent; transition:color .15s, border-color .15s;
   }
+  .tab-btn:hover{color:var(--text);}
   .tab-btn.active{color:var(--text); border-bottom-color:var(--brand);}
   table{width:100%; border-collapse:collapse;}
   th{
@@ -279,6 +284,25 @@
     .hero h1{font-size:32px;}
     .menu-toggle{display:block;}
     .nav-cta .btn-ghost{display:none;}
+    section{padding:56px 20px;}
+    .hero{padding:56px 20px 40px;}
+  }
+
+  @media(max-width:480px){
+    nav{padding:13px 16px;}
+    .logo{font-size:17px;}
+    .hero h1{font-size:27px;}
+    .hero p{font-size:15px;}
+    .hero-ctas{flex-direction:column;}
+    .hero-ctas .btn{width:100%;}
+    .trust-row{gap:18px;}
+    .section-head h2{font-size:25px;}
+    .summary-grid{grid-template-columns:1fr 1fr;}
+    .doc-options{grid-template-columns:1fr; gap:8px;}
+    .wallet-actions{flex-direction:column;}
+    .footer-grid{grid-template-columns:1fr;}
+    .footer-bottom{flex-direction:column; align-items:flex-start;}
+    .cta-band{padding:36px 22px;}
   }
 
   /* ---- Demo badge ---- */
@@ -315,7 +339,8 @@
     color:var(--text); border-radius:6px; background:none; border:none; cursor:pointer;
   }
   .drawer a:hover, .drawer button:hover{background:var(--panel2);}
-  .drawer-close{align-self:flex-end; font-size:22px; color:var(--muted); background:none; border:none; cursor:pointer; padding:6px;}
+  .drawer-close{align-self:flex-end; font-size:22px; color:var(--muted); background:none; border:none; cursor:pointer; padding:6px; transition:color .15s;}
+  .drawer-close:hover{color:var(--text);}
   .drawer hr{border:none; border-top:1px solid var(--border); margin:8px 0;}
 
   /* ---- Modal ---- */
@@ -331,24 +356,27 @@
   .modal-wide{max-width:640px;}
   .modal-close{
     position:absolute; top:16px; right:16px; background:none; border:none;
-    color:var(--muted); font-size:20px; cursor:pointer; line-height:1;
+    color:var(--muted); font-size:20px; cursor:pointer; line-height:1; transition:color .15s;
   }
+  .modal-close:hover{color:var(--text);}
   .modal h3{font-size:19px; margin-bottom:4px;}
   .modal .modal-sub{color:var(--muted); font-size:13px; margin-bottom:20px;}
   .field{margin-bottom:14px;}
   .field label{display:block; font-size:12.5px; color:var(--muted); margin-bottom:6px;}
-  .field input, .field select{
+  .field input, .field select, .field textarea{
     width:100%; padding:11px 12px; background:var(--panel2); border:1px solid var(--border);
     border-radius:6px; color:var(--text); font-size:14px; font-family:'Inter';
   }
-  .field input:focus, .field select:focus{outline:none; border-color:var(--brand2);}
+  .field textarea{resize:vertical; min-height:76px; line-height:1.5;}
+  .field input:focus, .field select:focus, .field textarea:focus{outline:none; border-color:var(--brand2);}
   .field-error{color:var(--loss); font-size:12px; margin-top:5px; display:none;}
-  .field.invalid input{border-color:var(--loss);}
+  .field.invalid input, .field.invalid select, .field.invalid textarea{border-color:var(--loss);}
   .field.invalid .field-error{display:block;}
   .field-row{display:flex; align-items:center; gap:8px; font-size:13px; color:var(--muted);}
   .field-row input{width:auto;}
   .modal-links{display:flex; justify-content:space-between; margin-top:16px; font-size:13px;}
-  .modal-links a, .modal-links button.link-btn{color:var(--brand2); background:none; border:none; cursor:pointer; font-size:13px;}
+  .modal-links a, .modal-links button.link-btn{color:var(--brand2); background:none; border:none; cursor:pointer; font-size:13px; transition:opacity .15s;}
+  .modal-links a:hover, .modal-links button.link-btn:hover{opacity:0.8;}
   .btn-full{width:100%; justify-content:center; display:flex; align-items:center; gap:8px;}
   .btn[disabled]{opacity:0.55; cursor:not-allowed;}
   .spinner{
@@ -374,7 +402,9 @@
   .doc-opt{
     border:1px solid var(--border); border-radius:8px; padding:12px 8px; text-align:center;
     cursor:pointer; font-size:12.5px; color:var(--muted); background:var(--panel2);
+    transition:border-color .15s, color .15s;
   }
+  .doc-opt:hover{border-color:var(--brand2); color:var(--text);}
   .doc-opt.selected{border-color:var(--brand); color:var(--brand); background:rgba(240,180,41,0.08);}
   .kyc-status-badge{
     display:inline-flex; align-items:center; gap:6px; padding:6px 12px; border-radius:100px;
@@ -407,33 +437,40 @@
   .summary-card .lbl{color:var(--muted); font-size:12px; margin-bottom:8px;}
   .summary-card .val{font-family:'Space Grotesk'; font-size:21px;}
   .dash-tabs{display:flex; gap:6px; margin-bottom:18px; flex-wrap:wrap; border-bottom:1px solid var(--border);}
-  .dash-tab{padding:11px 16px; background:none; border:none; color:var(--muted); font-size:14px; font-weight:600; cursor:pointer; border-bottom:2px solid transparent; font-family:'Space Grotesk';}
+  .dash-tab{padding:11px 16px; background:none; border:none; color:var(--muted); font-size:14px; font-weight:600; cursor:pointer; border-bottom:2px solid transparent; font-family:'Space Grotesk'; transition:color .15s, border-color .15s;}
+  .dash-tab:hover{color:var(--text);}
   .dash-tab.active{color:var(--text); border-bottom-color:var(--brand);}
   .dash-panel{display:none;}
   .dash-panel.active{display:block;}
   .panel-box{background:var(--panel); border:1px solid var(--border); border-radius:10px; overflow:hidden;}
   .panel-box-head{display:flex; justify-content:space-between; align-items:center; padding:16px 20px; border-bottom:1px solid var(--border); flex-wrap:wrap; gap:10px;}
   .empty-state{padding:44px 20px; text-align:center; color:var(--muted); font-size:14px;}
-  .star-btn{background:none; border:none; cursor:pointer; font-size:16px; color:var(--muted);}
+  .star-btn{background:none; border:none; cursor:pointer; font-size:16px; color:var(--muted); transition:color .15s, transform .15s;}
+  .star-btn:hover{color:var(--brand); transform:scale(1.1);}
   .star-btn.active{color:var(--brand);}
   .trade-btn-sm{
     padding:6px 12px; font-size:12.5px; border-radius:5px; border:1px solid var(--border);
     background:var(--panel2); color:var(--text); cursor:pointer; font-weight:600; margin-right:5px;
+    transition:filter .15s, border-color .15s;
   }
+  .trade-btn-sm:hover{filter:brightness(1.25);}
   .trade-btn-sm.buy{color:var(--gain); border-color:rgba(31,199,122,0.4);}
   .trade-btn-sm.sell{color:var(--loss); border-color:rgba(240,70,92,0.4);}
   .order-tabs{display:flex; gap:0; margin-bottom:16px; border:1px solid var(--border); border-radius:7px; overflow:hidden;}
-  .order-tab{flex:1; padding:10px; text-align:center; background:var(--panel2); border:none; color:var(--muted); font-weight:600; font-size:13.5px; cursor:pointer;}
+  .order-tab{flex:1; padding:10px; text-align:center; background:var(--panel2); border:none; color:var(--muted); font-weight:600; font-size:13.5px; cursor:pointer; transition:background .15s, color .15s;}
+  .order-tab:hover{color:var(--text);}
   .order-tab.buy-active{background:rgba(31,199,122,0.15); color:var(--gain);}
   .order-tab.sell-active{background:rgba(240,70,92,0.15); color:var(--loss);}
   .order-type-row{display:flex; gap:8px; margin-bottom:14px;}
-  .order-type-row button{flex:1; padding:8px; font-size:12.5px; border-radius:6px; border:1px solid var(--border); background:var(--panel2); color:var(--muted); cursor:pointer;}
+  .order-type-row button{flex:1; padding:8px; font-size:12.5px; border-radius:6px; border:1px solid var(--border); background:var(--panel2); color:var(--muted); cursor:pointer; transition:border-color .15s, color .15s;}
+  .order-type-row button:hover{color:var(--text);}
   .order-type-row button.active{border-color:var(--brand2); color:var(--text);}
   .order-summary{background:var(--panel2); border-radius:7px; padding:12px; font-size:13px; margin-bottom:14px;}
   .order-summary div{display:flex; justify-content:space-between; padding:3px 0; color:var(--muted);}
   .order-summary div b{color:var(--text); font-weight:600; font-family:'IBM Plex Mono';}
   .sparkline{display:block;}
-  .notif-bell{position:relative; background:none; border:1px solid var(--border); border-radius:7px; padding:8px 10px; cursor:pointer; color:var(--text);}
+  .notif-bell{position:relative; background:none; border:1px solid var(--border); border-radius:7px; padding:8px 10px; cursor:pointer; color:var(--text); transition:border-color .15s;}
+  .notif-bell:hover{border-color:var(--muted);}
   .notif-dot{position:absolute; top:5px; right:6px; width:7px; height:7px; border-radius:50%; background:var(--loss); display:none;}
   .notif-dot.show{display:block;}
   .notif-panel{
@@ -448,7 +485,8 @@
   .notif-item .t{font-weight:600; margin-bottom:2px;}
   .notif-item .s{color:var(--muted); font-size:11.5px;}
   .wallet-actions{display:flex; gap:10px; margin:16px 20px;}
-  .theme-toggle{background:none; border:1px solid var(--border); border-radius:7px; padding:8px 11px; cursor:pointer; color:var(--text); font-size:14px;}
+  .theme-toggle{background:none; border:1px solid var(--border); border-radius:7px; padding:8px 11px; cursor:pointer; color:var(--text); font-size:14px; transition:border-color .15s;}
+  .theme-toggle:hover{border-color:var(--muted);}
 
   body.light{
     --bg:#F5F6F8; --panel:#FFFFFF; --panel2:#F0F1F4; --border:#E2E5EA;
@@ -763,7 +801,7 @@
   <section id="how">
     <div class="section-head">
       <div class="section-tag">GETTING STARTED</div>
-      <h2>Live Trading in Three Steps</h2>
+      <h2>Practice Trading in Three Steps</h2>
     </div>
     <div class="steps">
       <div class="step"><div class="step-num">1</div><h4>Demo Sign Up &amp; KYC</h4><p>Create a demo account in 2 minutes and complete the demo KYC flow (real documents are not stored).</p></div>
@@ -786,9 +824,9 @@
   <!-- Fees -->
   <section id="fees">
     <div class="section-head">
-      <div class="section-tag">ILLUSTRATIVE FEES</div>
+      <div class="section-tag">SAMPLE PRICING — DEMO ONLY</div>
       <h2>Sample Fee Structure For Every Market</h2>
-      <p><span class="demo-badge">DEMO PRICING — no actual billing backend connected</span></p>
+      <p><span class="demo-badge">DEMO PRICING — illustrative example only, not connected to real billing or payments</span></p>
     </div>
     <div class="fees-grid">
       <div class="fee-card">
@@ -807,7 +845,7 @@
         <ul>
           <li>Spot + DEX pair access</li>
           <li>500+ coins listed</li>
-          <li>Instant INR/USDT on-ramp</li>
+          <li>Instant INR/USDT on-ramp (UI demo only)</li>
         </ul>
       </div>
       <div class="fee-card">
@@ -816,7 +854,7 @@
         <ul>
           <li>Major, minor &amp; exotic pairs</li>
           <li>No hidden commission</li>
-          <li>Leverage as per local norms</li>
+          <li>Leverage as per local norms (illustrative, not active)</li>
         </ul>
       </div>
     </div>
@@ -1288,9 +1326,6 @@ function enterDashboard(){
 }
 function exitDashboard(){
   state.loggedIn = false;
-  document.querySelectorAll('.dash-hidden').forEach(el=>{
-    if(el.id!=='dashboardSection' && el.id!=='dashLinkDesktop' && el.id!=='dashLinkMobile' && el.id!=='notifWrap' && el.id!=='logoutBtnDesktop' && el.id!=='logoutBtnMobile') return;
-  });
   document.getElementById('dashboardSection').classList.add('dash-hidden');
   document.getElementById('dashLinkDesktop').classList.add('dash-hidden');
   document.getElementById('dashLinkMobile').classList.add('dash-hidden');
@@ -1608,7 +1643,7 @@ document.getElementById('contactLink').addEventListener('click', (e)=>{
     <form id="contactForm">
       <div class="field"><label>Name</label><input type="text" id="cName" required></div>
       <div class="field"><label>Email</label><input type="email" id="cEmail" required></div>
-      <div class="field"><label>Message</label><input type="text" id="cMsg" required></div>
+      <div class="field"><label>Message</label><textarea id="cMsg" rows="4" required></textarea></div>
       <button type="submit" class="btn btn-brand btn-full">Send (Demo)</button>
     </form>`);
   setTimeout(()=>{
