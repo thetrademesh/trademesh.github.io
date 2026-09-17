@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TradeMesh — Documentation &amp; Installation Guide</title>
+<style>
+  :root{
+    --bg:#0B0D11;
+    --panel:#14171D;
+    --panel2:#1B1F27;
+    --border:#262B35;
+    --text:#EDEFF2;
+    --muted:#8B93A1;
+    --brand:#F0B429;
+    --brand2:#22D3C0;
+    --radius:8px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Segoe UI', Arial, sans-serif;
+    line-height:1.65;
+    padding:0 0 60px;
+  }
+  .wrap{max-width:860px; margin:0 auto; padding:0 24px;}
+  header{
+    border-bottom:1px solid var(--border);
+    padding:40px 0 28px;
+    margin-bottom:36px;
+  }
+  .logo-row{display:flex; align-items:center; gap:10px; margin-bottom:14px;}
+  .logo-mark{
+    width:34px; height:34px; border-radius:8px;
+    background:linear-gradient(135deg, var(--brand), var(--brand2));
+    display:flex; align-items:center; justify-content:center;
+    color:#0B0D11; font-weight:700;
+  }
+  h1{font-size:28px; margin-bottom:6px;}
+  header p{color:var(--muted); font-size:14.5px;}
+  h2{
+    font-size:20px; margin:38px 0 14px;
+    padding-bottom:8px; border-bottom:1px solid var(--border);
+    color:var(--text);
+  }
+  h3{font-size:15.5px; margin:20px 0 8px; color:var(--brand2);}
+  p{color:var(--muted); font-size:14.5px; margin-bottom:12px;}
+  ul, ol{color:var(--muted); font-size:14.5px; margin:0 0 14px 22px;}
+  li{margin-bottom:6px;}
+  code{
+    background:var(--panel2); border:1px solid var(--border); border-radius:4px;
+    padding:2px 7px; font-family:'Consolas', 'IBM Plex Mono', monospace; font-size:13px;
+    color:var(--brand);
+  }
+  pre{
+    background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
+    padding:16px 18px; overflow-x:auto; margin-bottom:16px;
+  }
+  pre code{
+    background:none; border:none; padding:0; color:var(--text); font-size:13px;
+  }
+  .box{
+    background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
+    padding:20px 22px; margin-bottom:16px;
+  }
+  .badge{
+    display:inline-block; font-size:11px; font-weight:600; letter-spacing:0.03em;
+    padding:3px 10px; border-radius:100px; margin-right:6px; margin-bottom:6px;
+  }
+  .badge-info{background:rgba(34,211,192,0.12); color:var(--brand2); border:1px solid rgba(34,211,192,0.35);}
+  .badge-warn{background:rgba(240,180,41,0.12); color:var(--brand); border:1px solid rgba(240,180,41,0.35);}
+  table{width:100%; border-collapse:collapse; margin-bottom:16px; font-size:13.5px;}
+  th{
+    text-align:left; padding:9px 12px; background:var(--panel2); color:var(--muted);
+    border-bottom:1px solid var(--border); font-size:12px; text-transform:uppercase; letter-spacing:0.03em;
+  }
+  td{padding:9px 12px; border-bottom:1px solid var(--border); color:var(--text);}
+  a{color:var(--brand2);}
+  .footer-note{
+    margin-top:44px; padding-top:20px; border-top:1px solid var(--border);
+    color:var(--muted); font-size:13px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="logo-row">
+      <div class="logo-mark">TM</div>
+      <h1>TradeMesh — Documentation</h1>
+    </div>
+    <p>Multi-asset trading UI template (stocks / crypto / forex demo dashboard) — installation &amp; file guide.</p>
+  </header>
+
+  <span class="badge badge-info">Frontend Template</span>
+  <span class="badge badge-warn">Demo / Simulated Data Only</span>
+
+  <h2>1. What This Is</h2>
+  <p>
+    TradeMesh is a front-end UI template for a multi-asset (stocks, crypto, forex) trading dashboard.
+    It includes a landing page, a demo trading dashboard, order modals, a Buy/Sell flow, a wallet panel,
+    and a KYC step flow. All balances, orders, portfolio values, and KYC verification shown in the demo are
+    <b>simulated in the browser</b> — nothing is sent to a real brokerage, bank, or KYC provider.
+  </p>
+  <p>
+    Crypto prices for BTC, ETH, SOL, BNB, and DOGE are pulled live from Binance's public market-data API
+    and refreshed automatically every 8 seconds. Stock and forex prices remain static demo data. If the
+    live price request fails for any reason (no internet connection, the API being temporarily unreachable,
+    etc.), the page automatically falls back to its last known / built-in static prices instead of showing
+    a blank or broken screen.
+  </p>
+
+  <h2>2. Folder Structure</h2>
+  <div class="box">
+    <pre><code>trademesh/
+├── index.html        → Main HTML page (structure &amp; markup only)
+├── css/
+│   └── style.css     → All styling (theme colors, layout, animations, responsive rules)
+├── js/
+│   └── app.js         → All application logic (state, rendering, modals, KYC,
+│                         wallet, order flow, and the live Binance price updater)
+└── README.html        → This documentation file</code></pre>
+  </div>
+
+  <h2>3. Installation</h2>
+  <ol>
+    <li>Unzip the package to a folder on your computer or server.</li>
+    <li>Keep <code>index.html</code>, the <code>css</code> folder, and the <code>js</code> folder together in the
+      same directory, exactly as they were unzipped — the paths inside <code>index.html</code> reference
+      <code>css/style.css</code> and <code>js/app.js</code> as relative paths.</li>
+    <li>Open <code>index.html</code> directly in a browser to preview it locally, or upload the whole folder
+      to any static web host (e.g. Netlify, Vercel, GitHub Pages, cPanel, Nginx, Apache).</li>
+    <li>No build step, package manager, or server-side code is required — this is a static HTML/CSS/JS site.</li>
+  </ol>
+
+  <h3>Running Locally</h3>
+  <p>You can simply double-click <code>index.html</code>. For the smoothest experience (and to avoid any
+    browser restrictions on local file access), you can also serve the folder with a lightweight local
+    server, for example:</p>
+  <pre><code>npx serve .
+# or
+python -m http.server 8080</code></pre>
+  <p>Then open the printed local address in your browser.</p>
+
+  <h2>4. File-by-File Notes</h2>
+
+  <h3>index.html</h3>
+  <p>Contains only the page markup — all sections (hero, ticker, market tables, dashboard panels, modals,
+    footer) and links to <code>css/style.css</code> in the <code>&lt;head&gt;</code> and <code>js/app.js</code>
+    at the end of the <code>&lt;body&gt;</code>.</p>
+
+  <h3>css/style.css</h3>
+  <p>Contains the full visual design: the dark theme color variables (with a light-theme override toggled
+    by the theme switch), typography, the ticker marquee animation, layout grids, modal styling, and
+    responsive breakpoints. Editing colors is done via the CSS custom properties near the top of the file
+    (<code>--bg</code>, <code>--panel</code>, <code>--brand</code>, etc.).</p>
+
+  <h3>js/app.js</h3>
+  <p>Contains the demo asset data, application state, and all interactive behavior: rendering market tables,
+    the watchlist, the portfolio/holdings/orders panels, the Buy/Sell order modal, the demo wallet
+    (add funds / withdraw), the 3-step KYC flow, 2FA toggle, search, theme toggle, and the live crypto price
+    updater described below.</p>
+
+  <h2>5. Live Crypto Prices (Binance API)</h2>
+  <p>
+    The file <code>js/app.js</code> includes a small module that polls Binance's public
+    <code>/api/v3/ticker/24hr</code> endpoint for the following pairs every 8 seconds and updates the price,
+    24h change %, high/low, and volume shown in the UI:
+  </p>
+  <table>
+    <thead><tr><th>Displayed Pair</th><th>Binance Symbol</th></tr></thead>
+    <tbody>
+      <tr><td>BTC/USDT</td><td><code>BTCUSDT</code></td></tr>
+      <tr><td>ETH/USDT</td><td><code>ETHUSDT</code></td></tr>
+      <tr><td>SOL/USDT</td><td><code>SOLUSDT</code></td></tr>
+      <tr><td>BNB/USDT</td><td><code>BNBUSDT</code></td></tr>
+      <tr><td>DOGE/USDT</td><td><code>DOGEUSDT</code></td></tr>
+    </tbody>
+  </table>
+  <p><b>Fallback behavior:</b> if the API request fails (offline, blocked, rate-limited, or Binance is
+    temporarily unreachable), the script simply keeps whatever prices it last had — including the original
+    static demo prices on first load — so the page never shows blank or broken data. It quietly retries
+    again on the next 8-second cycle.</p>
+  <p><b>Note for buyers:</b> because this call is made directly from the browser, it depends on the visitor's
+    own network being able to reach <code>api.binance.com</code>. No API key is required for this public,
+    read-only endpoint, and no personal or account data is ever sent to Binance.</p>
+
+  <h2>6. Customization Tips</h2>
+  <ul>
+    <li>To change branding/colors: edit the <code>:root</code> variables at the top of <code>css/style.css</code>.</li>
+    <li>To add/remove/edit stock or forex rows: edit the <code>ASSETS.stocks</code> / <code>ASSETS.forex</code>
+      arrays near the top of <code>js/app.js</code>.</li>
+    <li>To add/remove a crypto pair from the live feed: add or remove an entry in <code>ASSETS.crypto</code> and
+      the matching line in the <code>BINANCE_SYMBOL_MAP</code> object in <code>js/app.js</code>.</li>
+    <li>All amounts, KYC, and wallet actions are simulated client-side only — connecting them to a real
+      brokerage, payment gateway, or KYC/identity provider would require a licensed backend integration,
+      which is outside the scope of this template.</li>
+  </ul>
+
+  <h2>7. Important Disclaimer</h2>
+  <div class="box">
+    <p style="margin-bottom:0;">
+      This template is a <b>UI/demo product only</b>. It does not execute real trades, move real money,
+      perform real KYC/identity verification, or connect to any licensed brokerage, bank, or exchange
+      account. Anyone deploying this as a real financial product is responsible for obtaining the
+      appropriate licenses/approvals from their local financial regulator and for building a real,
+      secure backend — none of which is included in this package.
+    </p>
+  </div>
+
+  <div class="footer-note">
+    TradeMesh Template — Documentation. For support questions related to this template package, please use
+    the marketplace's messaging system to contact the author.
+  </div>
+
+</div>
+</body>
+</html>
